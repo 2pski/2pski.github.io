@@ -1,15 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>pski – notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="inside my brain. personal notes by pski.">
+
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --bg-card: #ffffff;
+      --text: #0b1220;
+      --muted: #667085;
+      --border: #e3e8f0;
+      --accent: #2563eb;
+      --max-width: 1080px;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px 80px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: var(--max-width);
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      width: 260px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, #dbeafe 0%, #2563eb 60%, #1e3a8a 100%);
+      border: 2px solid rgba(37, 99, 235, 0.25);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .handle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 400;
+      text-transform: lowercase;
+    }
+
+    .name {
+      font-size: 38px;
+      font-weight: 500;
+      text-transform: lowercase;
+      margin-bottom: 12px;
+    }
+
+    .bio {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    /* MAIN CARD */
+
+    .main-card {
+      flex: 1;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .tabs-row {
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      background: #f7f5f0;
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 4px;
+      margin: 8px 0;
+      padding: 2px;
+      border-radius: var(--radius-pill);
+      background: #e5dfd2;
+    }
+
+    .tab {
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-pill);
+      padding: 6px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .tab-active {
+      background: #ffffff;
+      color: var(--text);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-body {
+      padding: 22px 26px 24px;
+    }
+
+    /* POSTS LIST */
+
+    .posts-list {
+      list-style: none;
+    }
+
+    .post {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .post:last-of-type {
+      border-bottom: none;
+    }
+
+    .post-date {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .post-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .post-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .post-title a:hover {
+      text-decoration: underline;
+    }
+
+    .post-excerpt {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 640px;
+      margin-bottom: 6px;
+    }
+
+    .readmore {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .readmore-arrow {
+      font-size: 14px;
+    }
+
+    /* GALLERY */
+
+    .gallery-grid {
+      display: none; /* hidden by default, shown when Gallery tab active */
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    @media (max-width: 880px) {
+      body {
+        padding-top: 24px;
+      }
+      .page {
+        flex-direction: column;
+        max-width: 720px;
+      }
+      .sidebar {
+        width: 100%;
+      }
+      .name {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
 <body>
   <div class="page">
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="avatar">
-        <img src="https://2pski.github.io/avatar.jpg" alt="pski">
+        <!-- change this src to your own image if you want -->
+        <img src="https://2pski.github.io/avatar.jpg" alt="pski" />
       </div>
 
       <div class="handle">whoispski</div>
       <div class="name">pski</div>
-
       <p class="bio">
         inside my brain.
       </p>
@@ -20,7 +259,7 @@
       <div class="tabs-row">
         <div class="tabs">
           <button class="tab tab-active" data-tab="posts">Posts</button>
-          <button class="tab" data-tab="links">Links</button>
+          <button class="tab" data-tab="gallery">Gallery</button>
         </div>
       </div>
 
@@ -33,7 +272,9 @@
               <a href="#">What I Actually Want Out of All This</a>
             </h2>
             <p class="post-excerpt">
-              I keep pretending it’s about money, cars, apartments...
+              I keep pretending it’s about money, cars, apartments. It’s not.
+              It’s about waking up and doing work that feels like play and not
+              having to ask anyone for permission…
             </p>
             <div class="readmore">
               Read more <span class="readmore-arrow">→</span>
@@ -46,7 +287,9 @@
               <a href="#">Contrast</a>
             </h2>
             <p class="post-excerpt">
-              Some days feel like I’m sprinting on a treadmill...
+              Some days feel like I’m sprinting on a treadmill. Others feel like
+              I’m underwater. The contrast is where the interesting thoughts
+              show up, right between burnout and boredom…
             </p>
             <div class="readmore">
               Read more <span class="readmore-arrow">→</span>
@@ -59,7 +302,9 @@
               <a href="#">Quiet Is A Flex</a>
             </h2>
             <p class="post-excerpt">
-              Most people are addicted to noise...
+              Most people are addicted to noise. The hardest thing I’ve done is
+              give myself enough silence to hear what I actually think instead
+              of what the timeline is screaming at me…
             </p>
             <div class="readmore">
               Read more <span class="readmore-arrow">→</span>
@@ -67,20 +312,28 @@
           </li>
         </ul>
 
-        <!-- LINKS -->
-        <ul class="links-list" id="links-list" style="display:none;">
-          <li><a href="#">Example Link</a></li>
-        </ul>
-
+        <!-- GALLERY -->
+        <div class="gallery-grid" id="gallery-grid" style="display:none;">
+          <!-- EXAMPLE IMAGES – replace these with your own -->
+          <div class="gallery-item">
+            <img src="https://2pski.github.io/gallery1.jpg" alt="visual 1" />
+          </div>
+          <div class="gallery-item">
+            <img src="https://2pski.github.io/gallery2.jpg" alt="visual 2" />
+          </div>
+          <div class="gallery-item">
+            <img src="https://2pski.github.io/gallery3.jpg" alt="visual 3" />
+          </div>
+        </div>
       </div>
     </section>
 
-  </div> <!-- END OF PAGE -->
+  </div>
 
   <script>
     const tabs = document.querySelectorAll(".tab");
     const postsList = document.getElementById("posts-list");
-    const linksList = document.getElementById("links-list");
+    const galleryGrid = document.getElementById("gallery-grid");
 
     tabs.forEach((tab) => {
       tab.addEventListener("click", () => {
@@ -90,14 +343,13 @@
         const target = tab.dataset.tab;
         if (target === "posts") {
           postsList.style.display = "block";
-          linksList.style.display = "none";
-        } else {
+          galleryGrid.style.display = "none";
+        } else if (target === "gallery") {
           postsList.style.display = "none";
-          linksList.style.display = "block";
+          galleryGrid.style.display = "grid";
         }
       });
     });
   </script>
 </body>
 </html>
-
