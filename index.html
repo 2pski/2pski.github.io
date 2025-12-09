@@ -1,276 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>PSKI – Notes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Personal notes by PSKI. inside my brain.">
-
-  <style>
-    :root {
-  --bg: #f4f6fb;
-  --bg-card: #ffffff;
-  --text: #0b1220;
-  --muted: #667085;
-  --border: #e3e8f0;
-  --accent: #2563eb; /* MAIN BLUE */
-  --accent-soft: #dbeafe;
-}
-
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      padding: 40px 16px 80px;
-    }
-
-    .page {
-      width: 100%;
-      max-width: var(--max-width);
-      display: flex;
-      gap: 32px;
-      align-items: flex-start;
-    }
-
-    /* SIDEBAR */
-
-    .sidebar {
-      width: 260px;
-    }
-
-   .avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: #ffffff;
-  margin-bottom: 18px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--accent);
-}
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .handle {
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 12px;
-  font-weight: 400;
-  text-transform: lowercase;
-}
-
-    ..name {
-  font-size: 38px;
-  font-weight: 500;
-  margin-bottom: 32px;
-  text-transform: lowercase;
-}
-
-  .bio {
-  margin-bottom: 36px;
-}
-
-    .share-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-      margin-bottom: 6px;
-      margin-top: 4px;
-    }
-
-    .share-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .share-circle {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    /* MAIN CARD */
-
-    .main-card {
-      flex: 1;
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .tabs-row {
-      display: flex;
-      justify-content: center;
-      border-bottom: 1px solid var(--border);
-      background: #fbfaf8;
-    }
-
-    .tabs {
-      display: inline-flex;
-      gap: 4px;
-      margin: 8px 0;
-      padding: 2px;
-      border-radius: var(--radius-pill);
-      background: #ece8e0;
-    }
-
-    .tab {
-      border: none;
-      background: transparent;
-      border-radius: var(--radius-pill);
-      padding: 6px 16px;
-      font-size: 13px;
-      color: var(--muted);
-      cursor: pointer;
-    }
-
-    .tab-active {
-      background: #ffffff;
-      color: var(--text);
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
-    }
-
-    .card-body {
-      padding: 22px 26px 24px;
-    }
-
-    /* POSTS LIST */
-
-    .posts-list {
-      list-style: none;
-    }
-
-    .post {
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .post:last-of-type {
-      border-bottom: none;
-    }
-
-    .post-date {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .post-title {
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .post-title a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .post-title a:hover {
-      text-decoration: underline;
-    }
-
-    .post-excerpt {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 620px;
-      margin-bottom: 6px;
-    }
-
-    .readmore {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .readmore-arrow {
-      font-size: 14px;
-    }
-
-    /* LINKS LIST */
-
-    .links-list {
-      list-style: none;
-      display: none;
-    }
-
-    .links-list a {
-      display: block;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--text);
-      font-size: 14px;
-    }
-
-    .links-list a:last-of-type {
-      border-bottom: none;
-    }
-
-    .links-list a span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    @media (max-width: 880px) {
-      .page {
-        flex-direction: column;
-        max-width: 720px;
-      }
-      .sidebar {
-        width: 100%;
-      }
-    }
-  </style>
-</head>
 <body>
   <div class="page">
+
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="avatar">
-       <img src="https://2pski.github.io/avatar.jpg" alt="PSKI">
+        <img src="https://2pski.github.io/avatar.jpg" alt="pski">
       </div>
 
-      <div class="handle">pski</div>
-<div class="name"></div>
+      <div class="handle">whoispski</div>
+      <div class="name">pski</div>
+
       <p class="bio">
         inside my brain.
       </p>
+    </aside>
 
     <!-- MAIN CARD -->
     <section class="main-card">
@@ -290,9 +33,7 @@
               <a href="#">What I Actually Want Out of All This</a>
             </h2>
             <p class="post-excerpt">
-              I keep pretending it’s about money, cars, apartments. It’s not.
-              It’s about waking up and doing work that feels like play and not
-              having to ask anyone for permission…
+              I keep pretending it’s about money, cars, apartments...
             </p>
             <div class="readmore">
               Read more <span class="readmore-arrow">→</span>
@@ -305,9 +46,7 @@
               <a href="#">Contrast</a>
             </h2>
             <p class="post-excerpt">
-              Some days feel like I’m sprinting on a treadmill. Others feel like
-              I’m underwater. The contrast is where the interesting thoughts
-              show up, right between burnout and boredom…
+              Some days feel like I’m sprinting on a treadmill...
             </p>
             <div class="readmore">
               Read more <span class="readmore-arrow">→</span>
@@ -320,9 +59,7 @@
               <a href="#">Quiet Is A Flex</a>
             </h2>
             <p class="post-excerpt">
-              Most people are addicted to noise. The hardest thing I’ve done is
-              give myself enough silence to hear what I actually think instead
-              of what the timeline is screaming at me…
+              Most people are addicted to noise...
             </p>
             <div class="readmore">
               Read more <span class="readmore-arrow">→</span>
@@ -331,29 +68,14 @@
         </ul>
 
         <!-- LINKS -->
-        <ul class="links-list" id="links-list">
-          <li>
-            <a href="https://youtube.com" target="_blank">
-              YouTube
-              <span> – channel where I experiment with internet attention</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com" target="_blank">
-              X (Twitter)
-              <span> – shorter, messier thoughts</span>
-            </a>
-          </li>
-          <li>
-            <a href="mailto:you@example.com">
-              Email
-              <span> – say hi</span>
-            </a>
-          </li>
+        <ul class="links-list" id="links-list" style="display:none;">
+          <li><a href="#">Example Link</a></li>
         </ul>
+
       </div>
     </section>
-  </div>
+
+  </div> <!-- END OF PAGE -->
 
   <script>
     const tabs = document.querySelectorAll(".tab");
